@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-               sh 'git clone https://github.com/HadasZeldin/ProjectDevo.git .'
+               sh 'git clone https://github.com/HadasZeldin/ProjectDevo.git'
             }
         }
 
