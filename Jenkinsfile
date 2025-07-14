@@ -2,25 +2,26 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'hadashub/flask'
+        DOCKER_IMAGE = 'hadashub/flask-app'
+        DOCKER_TAG = 'latest'
     }
 
     stages {
-        stage('Clone Repo') {
+        stage('checkout') {
             steps {
-                git 'https://github.com/HadasZeldin/ProjectDevo.git'
+               sh 'git clone https://github.com/HadasZeldin/ProjectDevo.git .'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE:latest .'
+                sh 'docker build -t hadashub/flask-app:latest .'
             }
         }
 
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         docker push $DOCKER_IMAGE:latest
