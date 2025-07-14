@@ -15,7 +15,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t hadashub/flask-app:latest .'
+               sh 'docker build -t hadashub/flask-app:latest ./ProjectDevo/flask-app .'
+
             }
         }
 
