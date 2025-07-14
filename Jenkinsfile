@@ -5,10 +5,11 @@ pipeline {
         DOCKER_IMAGE = 'hadashub/flask-app'
         DOCKER_TAG = 'latest'
     }
+    
     stages {
         stage('Cleanup Workspace') {
             steps {
-                deleteDir()  // This removes all files, including hidden ones.
+                deleteDir() 
 
     stages {
         stage('checkout') {
@@ -41,6 +42,7 @@ pipeline {
             }
         }
 
-        
+       }
     }
 }
+    }
